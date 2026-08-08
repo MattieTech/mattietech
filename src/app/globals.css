@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.signal.DEFAULT") transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  @apply bg-bone text-ink font-body antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+html.dark body {
+  @apply bg-void text-paper;
+}
+
+::selection {
+  background: theme("colors.signal.DEFAULT");
+  color: white;
+}
+
+/* Focus visibility — accessibility floor */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid theme("colors.signal.DEFAULT");
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.signal.dim");
+  border-radius: 999px;
+}
+
+.container-content {
+  @apply mx-auto w-full max-w-content px-4 sm:px-6 md:px-10;
+}
+
+.eyebrow {
+  @apply font-mono text-xs uppercase tracking-[0.2em] text-signal;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.card-surface {
+  @apply border border-bone-border bg-bone-raised dark:border-void-border dark:bg-void-raised;
+}
+
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
