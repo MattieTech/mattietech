@@ -109,7 +109,10 @@ function getFallbackResponse(message: string): { response: string; action?: stri
     query.includes("who are you") ||
     query.includes("about matthew") ||
     query.includes("what does matthew do") ||
-    query.includes("who is he")
+    query.includes("who is he") ||
+    query.includes("hello") ||
+    query.includes("hi") ||
+    query.includes("hey")
   ) {
     return {
       response:
@@ -243,23 +246,25 @@ function getFallbackResponse(message: string): { response: string; action?: stri
 
   return {
     response:
-      "I don't have that specific detail available right now, but you can contact Matthew directly for more information! Would you like to check his projects, tech stack, or services?",
+      "I’m MattieTech AI 👋 I can help you explore Matthew’s projects, tech stack, services, or contact details. What would you like to know?",
   };
 }
 
 export async function POST(request: Request) {
+  let userMessage = "";
   try {
     const body = await request.json();
     const { message, conversation } = body;
+    userMessage = typeof message === "string" ? message : "";
 
-    if (!message || typeof message !== "string" || !message.trim()) {
+    if (!userMessage || !userMessage.trim()) {
       return NextResponse.json(
         { success: false, error: "Please enter a valid message." },
         { status: 400 }
       );
     }
 
-    if (message.length > 1000) {
+    if (userMessage.length > 1000) {
       return NextResponse.json(
         { success: false, error: "Message is too long. Please limit to 1000 characters." },
         { status: 400 }
@@ -267,7 +272,7 @@ export async function POST(request: Request) {
     }
 
     // Security check against prompt injection / key theft
-    if (isSecurityViolation(message)) {
+    if (isSecurityViolation(userMessage)) {
       return NextResponse.json({
         success: true,
         response:
@@ -277,9 +282,9 @@ export async function POST(request: Request) {
 
     const apiKey = process.env.GEMINI_API_KEY;
 
-    // If API key is missing, return fallback response directly
-    if (!apiKey) {
-      const fallback = getFallbackResponse(message);
+    // If API key is missing or blank, return intelligent fallback response directly
+    if (!apiKey || !apiKey.trim()) {
+      const fallback = getFallbackResponse(userMessage);
       return NextResponse.json({
         success: true,
         response: fallback.response,
@@ -287,9 +292,9 @@ export async function POST(request: Request) {
       });
     }
 
-    // Use Gemini API if Key is present
+    // Use Gemini API with gemini-1.5-flash
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const systemInstruction = `
 You are MattieTech AI, the official AI portfolio assistant for Matthew Aliu (also known as MattieTech).
@@ -343,7 +348,7 @@ ${buildKnowledgeContext()}
       systemInstruction: systemInstruction,
     });
 
-    const result = await chat.sendMessage(message);
+    const result = await chat.sendMessage(userMessage);
     const responseText = result.response.text();
 
     // Extract navigation tag if present
@@ -362,9 +367,8 @@ ${buildKnowledgeContext()}
   } catch (error: any) {
     console.error("Error in MattieTech AI chat API route:", error);
 
-    // Graceful fallback if Gemini API call fails or rate limits
-    const body = await request.clone().json().catch(() => ({ message: "" }));
-    const fallback = getFallbackResponse(body.message || "");
+    // Clean fallback execution without re-reading consumed request stream
+    const fallback = getFallbackResponse(userMessage);
 
     return NextResponse.json({
       success: true,
