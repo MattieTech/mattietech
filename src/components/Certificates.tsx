@@ -59,7 +59,7 @@ export default function Certificates() {
                 href={cert.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center justify-center gap-1.5 rounded-lg border border-bone-border dark:border-void-border py-2.5 text-sm font-medium hover:border-signal hover:text-signal transition-colors"
+                className="mt-6 btn-secondary rounded-xl py-2.5 text-sm font-medium w-full"
               >
                 Verify Credential
                 <ExternalLink size={14} />

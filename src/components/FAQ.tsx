@@ -34,12 +34,12 @@ export default function FAQ() {
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left"
+                  className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left hover:bg-signal/5 cursor-pointer transition-all active:scale-[0.99] group"
                 >
-                  <span className={`font-medium ${isOpen ? "text-signal" : ""}`}>
+                  <span className={`font-medium group-hover:text-signal transition-colors ${isOpen ? "text-signal" : ""}`}>
                     {faq.question}
                   </span>
-                  <span className="shrink-0 text-ink-muted dark:text-paper-muted">
+                  <span className="shrink-0 text-ink-muted dark:text-paper-muted group-hover:text-signal transition-colors">
                     {isOpen ? <X size={16} /> : <Plus size={16} />}
                   </span>
                 </button>

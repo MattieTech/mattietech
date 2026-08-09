@@ -130,7 +130,7 @@ export default function OpenSource() {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg border border-bone-border dark:border-void-border py-2.5 text-sm font-medium hover:border-signal hover:text-signal transition-colors w-fit px-5"
+              className="mt-6 btn-secondary rounded-xl py-2.5 px-5 text-sm font-medium w-fit"
             >
               <Github size={15} />
               Visit GitHub profile

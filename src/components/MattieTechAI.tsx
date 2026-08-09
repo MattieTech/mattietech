@@ -613,7 +613,7 @@ export default function MattieTechAI() {
                       <button
                         key={idx}
                         onClick={() => handlePromptClick(prompt)}
-                        className="px-2.5 py-1.5 rounded-lg bg-void-border/40 hover:bg-signal/20 hover:border-signal/40 border border-void-border text-xs text-paper hover:text-signal font-medium transition-all text-left cursor-pointer"
+                        className="px-2.5 py-1.5 rounded-lg bg-void-border/40 hover:bg-signal/20 hover:border-signal/50 border border-void-border text-xs text-paper hover:text-signal font-medium transition-all text-left cursor-pointer hover:scale-105 active:scale-95"
                       >
                         {prompt.label}
                       </button>
@@ -648,7 +648,7 @@ export default function MattieTechAI() {
                   type="submit"
                   disabled={!input.trim() || loading}
                   aria-label="Send message"
-                  className="p-2.5 rounded-xl bg-signal text-white hover:bg-signal-dim disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 grid place-items-center cursor-pointer"
+                  className="p-2.5 rounded-xl bg-signal text-white hover:bg-signal-dim disabled:opacity-40 disabled:cursor-not-allowed transition-all hover:scale-105 active:scale-95 shrink-0 grid place-items-center cursor-pointer hover:shadow-md hover:shadow-signal/30"
                 >
                   <Send size={16} />
                 </button>

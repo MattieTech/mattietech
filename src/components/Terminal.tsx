@@ -103,7 +103,7 @@ export default function Terminal() {
             <button
               onClick={() => setLines([])}
               aria-label="Clear terminal"
-              className="ml-auto text-paper-muted hover:text-terminal-green transition-colors"
+              className="ml-auto text-paper-muted hover:text-terminal-green transition-all cursor-pointer hover:scale-110 active:scale-95"
             >
               <Trash2 size={14} />
             </button>
@@ -115,7 +115,7 @@ export default function Terminal() {
               <button
                 key={cmd}
                 onClick={() => runQuick(cmd)}
-                className="font-mono text-xs px-2.5 py-1 rounded-md border border-void-border text-paper-muted hover:border-signal hover:text-signal-light transition-colors"
+                className="font-mono text-xs px-2.5 py-1 rounded-md border border-void-border text-paper-muted hover:border-signal hover:text-signal-light hover:bg-signal/10 transition-all cursor-pointer hover:scale-105 active:scale-95"
               >
                 {cmd}
               </button>

@@ -58,7 +58,7 @@ export default function CommandPalette() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open search"
-        className="hidden sm:flex items-center gap-2 rounded-full border border-bone-border dark:border-void-border px-3.5 py-2 text-xs text-ink-muted dark:text-paper-muted hover:border-signal transition-colors"
+        className="hidden sm:flex items-center gap-2 rounded-full border border-bone-border dark:border-void-border px-3.5 py-2 text-xs text-ink-muted dark:text-paper-muted hover:border-signal btn-hover-effect hover:shadow-sm"
       >
         <Search size={14} />
         <span className="font-mono">⌘K</span>
@@ -66,7 +66,7 @@ export default function CommandPalette() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open search"
-        className="sm:hidden w-9 h-9 grid place-items-center rounded-full border border-bone-border dark:border-void-border"
+        className="sm:hidden w-9 h-9 grid place-items-center rounded-full border border-bone-border dark:border-void-border btn-hover-effect hover:border-signal"
       >
         <Search size={15} />
       </button>
@@ -119,9 +119,9 @@ export default function CommandPalette() {
                   <button
                     key={d.id}
                     onClick={() => go(d.id)}
-                    className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-signal/10 transition-colors"
+                    className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-signal/15 hover:pl-5 transition-all cursor-pointer group"
                   >
-                    <span className="text-sm text-paper font-medium">{d.label}</span>
+                    <span className="text-sm text-paper font-medium group-hover:text-signal transition-colors">{d.label}</span>
                     <span className="text-xs text-paper-muted font-mono">{d.hint}</span>
                   </button>
                 ))}
