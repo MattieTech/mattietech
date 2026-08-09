@@ -101,14 +101,14 @@ export default function DownloadResumeButton({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-7 sm:translate-x-0 z-[100] flex items-center gap-3 px-4 py-3 rounded-2xl border border-emerald-500/30 bg-void-raised/95 backdrop-blur-xl text-paper shadow-2xl max-w-sm w-[90vw]"
+            className="fixed bottom-5 left-4 right-4 sm:left-auto sm:right-7 sm:max-w-sm z-[100] flex items-center gap-3 px-4 py-3 rounded-2xl border border-emerald-500/30 bg-void-raised/95 backdrop-blur-xl text-paper shadow-2xl"
           >
             <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 grid place-items-center shrink-0">
               <Check size={18} />
             </div>
-            <div className="flex-1 text-xs">
-              <p className="font-semibold text-paper">Resume Downloaded!</p>
-              <p className="text-paper-muted mt-0.5">
+            <div className="flex-1 min-w-0 text-xs">
+              <p className="font-semibold text-paper truncate">Resume Downloaded!</p>
+              <p className="text-paper-muted mt-0.5 leading-snug break-words">
                 Matthew-Aliu-Resume.pdf saved to your Downloads folder.
               </p>
             </div>
