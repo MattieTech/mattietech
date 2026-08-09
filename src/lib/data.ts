@@ -176,7 +176,7 @@ export const projects: Project[] = [
     caseStudy:
       "My most ambitious build to date: an in-browser Monaco editor, AI-generated challenges, 3D reward scenes and integrated payments, architected as a genuine production system rather than a tutorial project.",
     stack: ["Next.js 15", "Express", "Supabase", "Gemini API", "Monaco Editor", "React Three Fiber", "Stripe / Paystack"],
-    github: "https://github.com/MattieTech/codequest-ai",
+    github: "https://github.com/MattieTech/codequest",
     demoLabel: "Request early access",
     featured: true,
     accent: "indigo",
