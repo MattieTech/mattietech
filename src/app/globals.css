@@ -95,8 +95,37 @@ textarea:focus-visible,
 }
 
 .hover-lift {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 .hover-lift:hover {
   transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(79, 93, 255, 0.15);
 }
+
+/* Universal pointer floor for interactive elements */
+button,
+a,
+select,
+input[type="submit"],
+input[type="button"],
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Modern Button Hover & Micro-interaction Classes */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-signal to-sky-400 text-white font-medium shadow-md shadow-signal/20 hover:shadow-lg hover:shadow-signal/35 hover:brightness-110 transition-all duration-200 ease-out cursor-pointer hover:scale-[1.03] active:scale-[0.97] hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-bone-border dark:border-void-border px-5 py-3 text-sm font-medium hover:border-signal hover:text-signal hover:bg-signal/5 hover:shadow-md hover:shadow-signal/10 transition-all duration-200 ease-out cursor-pointer hover:scale-[1.03] active:scale-[0.97] hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-1.5 text-sm font-medium text-ink-muted dark:text-paper-muted hover:text-signal dark:hover:text-signal transition-all duration-200 ease-out cursor-pointer hover:scale-[1.02] active:scale-[0.98];
+}
+
+.btn-hover-effect {
+  @apply transition-all duration-200 ease-out cursor-pointer hover:scale-[1.03] active:scale-[0.97] hover:-translate-y-0.5 active:translate-y-0;
+}
+

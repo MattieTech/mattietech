@@ -18,6 +18,7 @@ import {
   AlertCircle,
   ExternalLink,
 } from "lucide-react";
+import DownloadResumeButton from "./DownloadResumeButton";
 import SectionHeading from "./SectionHeading";
 import { profile } from "@/lib/data";
 
@@ -180,7 +181,7 @@ export default function Contact() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-bone-border dark:border-void-border px-3.5 py-2 text-xs font-medium hover:border-signal hover:text-signal transition-colors"
+                    className="btn-hover-effect inline-flex items-center gap-2 rounded-full border border-bone-border dark:border-void-border px-3.5 py-2 text-xs font-medium hover:border-signal hover:text-signal hover:bg-signal/5 hover:shadow-sm"
                   >
                     <Icon size={15} />
                     {label}
@@ -189,14 +190,9 @@ export default function Contact() {
               </div>
             </div>
 
-            <a
-              href={profile.resumeHref}
-              download
-              className="inline-flex items-center gap-2 text-sm font-medium text-ink-muted hover:text-signal dark:text-paper-muted dark:hover:text-signal transition-colors pt-2"
-            >
-              <Download size={15} />
-              Download résumé (PDF)
-            </a>
+            <div className="pt-2">
+              <DownloadResumeButton variant="text" label="Download résumé (PDF)" />
+            </div>
           </motion.div>
 
           {/* Form */}
@@ -234,7 +230,7 @@ export default function Contact() {
                 id="subject"
                 value={form.subject}
                 onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-                className="mt-2 w-full rounded-lg border border-bone-border dark:border-void-border bg-transparent px-4 py-3 text-sm outline-none focus:border-signal transition-colors appearance-none"
+                className="mt-2 w-full rounded-lg border border-bone-border dark:border-void-border bg-transparent px-4 py-3 text-sm outline-none focus:border-signal hover:border-signal/60 cursor-pointer transition-colors appearance-none"
               >
                 <option value="" className="bg-bone dark:bg-void">
                   What's this about?
@@ -257,7 +253,7 @@ export default function Contact() {
                 rows={5}
                 value={form.message}
                 onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                className="mt-2 w-full rounded-lg border border-bone-border dark:border-void-border bg-transparent px-4 py-3 text-sm outline-none focus:border-signal transition-colors resize-none"
+                className="mt-2 w-full rounded-lg border border-bone-border dark:border-void-border bg-transparent px-4 py-3 text-sm outline-none focus:border-signal hover:border-signal/60 transition-colors resize-none"
                 placeholder="Tell me about your project…"
               />
             </div>
@@ -265,7 +261,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-signal to-cyan-400 text-white px-6 py-3.5 text-sm font-semibold hover:brightness-110 disabled:opacity-70 transition-all cursor-pointer"
+              className="group btn-primary w-full sm:w-auto px-6 py-3.5 text-sm font-semibold disabled:opacity-70"
             >
               {status === "sending" ? (
                 <>

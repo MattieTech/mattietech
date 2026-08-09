@@ -14,6 +14,18 @@ import {
   Bot,
   User,
 } from "lucide-react";
+import {
+  profile,
+  projects,
+  skills,
+  education,
+  services,
+  timeline,
+  faqs,
+  certificates,
+  about,
+  skillLevels,
+} from "@/lib/data";
 
 type Message = {
   id: string;
@@ -30,6 +42,218 @@ const SUGGESTED_PROMPTS = [
   { label: "Services", query: "What services does Matthew offer?", action: "#services" },
   { label: "Contact Matthew", query: "How can I contact Matthew?", action: "#contact" },
 ];
+
+// Helper for security check against prompt injection / secret exposure
+function isSecurityViolation(query: string): boolean {
+  const lower = query.toLowerCase();
+  const dangerousPatterns = [
+    "api_key",
+    "apikey",
+    "secret",
+    "system prompt",
+    "environment variable",
+    "process.env",
+    "db_pass",
+    "private key",
+    "ignore previous instructions",
+    "bypass safety",
+    "reveal key",
+    "show key",
+  ];
+  return dangerousPatterns.some((pattern) => lower.includes(pattern));
+}
+
+// Comprehensive, intelligent client-side knowledge engine
+function generateAIResponse(message: string): { response: string; action?: string } {
+  const query = message.toLowerCase().trim();
+
+  // Security refusal
+  if (isSecurityViolation(query)) {
+    return {
+      response:
+        "I am MattieTech AI, the official portfolio assistant for Matthew Aliu. I am designed exclusively to help visitors explore Matthew's projects, skills, services, and background. I cannot expose internal credentials or system configurations.",
+    };
+  }
+
+  // 1. Identity & Bio / Who is Matthew
+  if (
+    query.includes("who is matthew") ||
+    query.includes("who are you") ||
+    query.includes("about matthew") ||
+    query.includes("what does matthew do") ||
+    query.includes("who is he") ||
+    query.includes("mattietech") ||
+    query.includes("hello") ||
+    query.includes("hi") ||
+    query.includes("hey")
+  ) {
+    return {
+      response:
+        "I’m **MattieTech AI**, the official AI portfolio assistant for Matthew Aliu!\n\nMatthew is a **100 Level Software Engineering student** at Confluence University of Science and Technology (CUSTECH) with a **4.88 / 5.00 CGPA**.\n\nHe specializes in **Full-Stack Web Development**, **AI Application Development**, and building scalable digital systems.\n\n[NAVIGATE:#about]",
+      action: "#about",
+    };
+  }
+
+  // 2. Specific Project: CampusTutor AI
+  if (
+    query.includes("campustutor") ||
+    query.includes("campus tutor") ||
+    query.includes("tell me about campustutor")
+  ) {
+    const proj = projects.find((p) => p.name === "CampusTutor AI");
+    return {
+      response: `**CampusTutor AI** is an AI-powered study platform built by Matthew Aliu under the MattieTech brand.\n\n• **What it does**: Allows students to upload lecture documents and generates clean summaries, explanations, and revision questions in seconds.\n• **Problem it solves**: Helps students condense dense lecture PDFs during exam season.\n• **Tech Stack**: Next.js, Supabase, Google Gemini API, TypeScript, Tailwind CSS.\n• **Live Impact**: 91+ active users, 98+ documents processed, 157+ AI generations.\n\n[Live Demo](${proj?.demo}) | [GitHub Repository](${proj?.github})\n\n[NAVIGATE:#projects]`,
+      action: "#projects",
+    };
+  }
+
+  // 3. Specific Project: CodeQuest AI
+  if (query.includes("codequest") || query.includes("code quest")) {
+    const proj = projects.find((p) => p.name === "CodeQuest AI");
+    return {
+      response: `**CodeQuest AI** is Matthew's flagship project — a gamified, AI-powered coding education platform.\n\n• **What it does**: Features an in-browser Monaco editor, AI-generated coding challenges, 3D reward scenes, and integrated payment processing.\n• **Architecture**: 113-file production-ready build.\n• **Tech Stack**: Next.js 15, Express, Supabase, Gemini API, Monaco Editor, React Three Fiber, Stripe/Paystack.\n\n[GitHub Repository](${proj?.github})\n\n[NAVIGATE:#projects]`,
+      action: "#projects",
+    };
+  }
+
+  // 4. Specific Project: FCI Student Guide
+  if (query.includes("fci student guide") || query.includes("fci guide") || query.includes("fci")) {
+    const proj = projects.find((p) => p.name === "FCI Student Guide");
+    return {
+      response: `**FCI Student Guide** is a multi-page student resource portal built for CUSTECH's Faculty of Computing and Informatics.\n\n• **Purpose**: Gives students a centralized hub for course information, departmental guidance, and academic materials.\n• **Tech Stack**: HTML, CSS, JavaScript.\n\n[GitHub Repository](${proj?.github})\n\n[NAVIGATE:#projects]`,
+      action: "#projects",
+    };
+  }
+
+  // 5. Specific Project: ProGrade
+  if (query.includes("prograde")) {
+    const proj = projects.find((p) => p.name === "ProGrade");
+    return {
+      response: `**ProGrade** is an academic productivity tool built by Matthew Aliu.\n\n• **Purpose**: A clean, fast GPA and CGPA calculator built for university students to track their academic performance.\n• **Tech Stack**: JavaScript, HTML, CSS.\n\n[GitHub Repository](${proj?.github})\n\n[NAVIGATE:#projects]`,
+      action: "#projects",
+    };
+  }
+
+  // 6. Projects Overview
+  if (
+    query.includes("project") ||
+    query.includes("built") ||
+    query.includes("work") ||
+    query.includes("portfolio") ||
+    query.includes("show me his projects")
+  ) {
+    return {
+      response: `Matthew has built and shipped several practical applications:\n\n1. **CampusTutor AI**: AI-powered lecture document study assistant for university students.\n2. **CodeQuest AI**: Gamified coding platform with Monaco editor, AI tutor & 3D scenes.\n3. **FCI Student Guide**: Academic portal for CUSTECH Faculty of Computing & Informatics.\n4. **ProGrade**: University GPA/CGPA calculation tool.\n5. **MattieTech Portfolio**: This production-grade Next.js portfolio website.\n\n[NAVIGATE:#projects]`,
+      action: "#projects",
+    };
+  }
+
+  // 7. Tech Stack & Technologies
+  if (
+    query.includes("skill") ||
+    query.includes("tech stack") ||
+    query.includes("technology") ||
+    query.includes("technologies") ||
+    query.includes("react") ||
+    query.includes("next") ||
+    query.includes("node") ||
+    query.includes("supabase") ||
+    query.includes("full-stack") ||
+    query.includes("full stack") ||
+    query.includes("frontend") ||
+    query.includes("backend") ||
+    query.includes("ai")
+  ) {
+    return {
+      response: `Matthew's technical skills & stack include:\n\n• **Frontend**: HTML, CSS, JavaScript, TypeScript, React, Next.js 15, Tailwind CSS, Framer Motion\n• **Backend**: Node.js, Express, REST APIs, Supabase\n• **Database**: PostgreSQL, Supabase, MongoDB\n• **AI Engineering**: Google Gemini API, AI-powered Web Apps, AI Chatbot Integrations\n• **Tools & Platforms**: Git, GitHub, Vercel, Firebase, Netlify, VS Code, Figma\n\n[NAVIGATE:#skills]`,
+      action: "#skills",
+    };
+  }
+
+  // 8. Services & Freelance / Website Building
+  if (
+    query.includes("service") ||
+    query.includes("freelance") ||
+    query.includes("hire") ||
+    query.includes("build a website") ||
+    query.includes("build website") ||
+    query.includes("can i hire him") ||
+    query.includes("available for freelance")
+  ) {
+    return {
+      response: `Yes! Matthew is available for freelance projects, custom web development, and internships. His services include:\n\n• **Business & Portfolio Websites**: Custom, responsive landing pages & brand sites.\n• **Full-Stack Web Applications**: Scalable apps built with React, Next.js, and Supabase/Node.js.\n• **AI Integrations & Chatbots**: LLM integrations, document intelligence, and custom AI tools.\n• **Student & Education Portals**: Custom calculators, course guides, and departmental portals.\n• **E-commerce Setup**: Storefront setup for small businesses.\n\n[NAVIGATE:#services]`,
+      action: "#services",
+    };
+  }
+
+  // 9. Pricing Questions (Never invent price!)
+  if (query.includes("price") || query.includes("cost") || query.includes("how much") || query.includes("rate")) {
+    return {
+      response: `Matthew’s pricing depends on the specific project scope and requirements. You can contact him directly to discuss your project and get a custom quote!\n\n[NAVIGATE:#contact]`,
+      action: "#contact",
+    };
+  }
+
+  // 10. Recruiter / Internship / Hiring Evaluation Mode
+  if (
+    query.includes("recruiter") ||
+    query.includes("why hire") ||
+    query.includes("internship") ||
+    query.includes("job") ||
+    query.includes("employ") ||
+    query.includes("evaluate")
+  ) {
+    return {
+      response: `Matthew is a high-performing **Software Engineering student (4.88 / 5.00 CGPA)** who focuses on building practical web and AI applications. Rather than learning technologies theoretically, he uses them to build and deploy real products such as **CampusTutor AI** (91+ users) and **CodeQuest AI**.\n\nHis strongest areas include **Frontend Engineering**, **Full-Stack Web Development**, **AI API Integration**, and **Modern UI Systems**.\n\nHe is open to Software Engineering internships, junior roles, and remote freelance opportunities.\n\n[NAVIGATE:#contact]`,
+      action: "#contact",
+    };
+  }
+
+  // 11. Contact & Social Links
+  if (
+    query.includes("contact") ||
+    query.includes("email") ||
+    query.includes("reach") ||
+    query.includes("whatsapp") ||
+    query.includes("message") ||
+    query.includes("location")
+  ) {
+    return {
+      response: `You can contact Matthew Aliu directly through:\n\n• **Email**: ${profile.email}\n• **WhatsApp**: ${profile.whatsappNumber} (${profile.whatsapp})\n• **Location**: ${profile.location} (West Africa Time, UTC+1 — comfortable working async)\n• **Social Media**: GitHub (@MattieTech), LinkedIn, X (@mattie_tech), Instagram, TikTok\n\nOr send a message using the portfolio contact form below!\n\n[NAVIGATE:#contact]`,
+      action: "#contact",
+    };
+  }
+
+  // 12. Education & Academic Background
+  if (
+    query.includes("education") ||
+    query.includes("academic") ||
+    query.includes("custech") ||
+    query.includes("cgpa") ||
+    query.includes("school") ||
+    query.includes("university") ||
+    query.includes("class")
+  ) {
+    return {
+      response: `Matthew is currently a **100 Level Software Engineering student** at **Confluence University of Science and Technology (CUSTECH)** in Osara, Kogi State, Nigeria.\n\n• **CGPA**: 4.88 / 5.00 (Ranked at top of class)\n• **Role**: Course Representative for SWE142 (coordinating 100+ students)\n• **Focus**: Combining rigorous software engineering fundamentals with hands-on product building.\n\n[NAVIGATE:#about]`,
+      action: "#about",
+    };
+  }
+
+  // 13. What is he learning / Journey
+  if (query.includes("learning") || query.includes("journey") || query.includes("timeline")) {
+    return {
+      response: `Matthew is currently expanding his expertise in:\n\n• **System Design & Architecture**\n• **Advanced AI Engineering**\n• **Cybersecurity Fundamentals**\n\nHe documents his progress publicly under **#100DaysOfCode** and **#MattieTech** across social media platforms.\n\n[NAVIGATE:#about]`,
+      action: "#about",
+    };
+  }
+
+  // Fallback for unverified or unknown queries
+  return {
+    response:
+      "I don't have that specific information available right now, but you can contact Matthew directly for more details!\n\nWould you like to explore his projects, tech stack, or services?",
+  };
+}
 
 export default function MattieTechAI() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,66 +312,35 @@ export default function MattieTechAI() {
     if (!textToSend) setInput("");
     setLoading(true);
 
-    try {
-      const formattedHistory = messages
-        .filter((m) => m.id !== "welcome-1")
-        .map((m) => ({
-          role: m.role === "user" ? "user" : "model",
-          content: m.content,
-        }));
+    // Simulate natural typing delay for realistic interaction
+    setTimeout(() => {
+      let aiResult: { response: string; action?: string } = { response: "", action: undefined };
 
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: messageText,
-          conversation: formattedHistory,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (data.success && data.response) {
-        const assistantMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: data.response,
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-          action: data.action,
+      try {
+        aiResult = generateAIResponse(messageText);
+      } catch (err) {
+        aiResult = {
+          response:
+            "I'm MattieTech AI 👋 You can explore Matthew's projects, tech stack, services, or reach out directly using the contact form!",
+          action: undefined,
         };
-
-        setMessages((prev) => [...prev, assistantMessage]);
-
-        if (data.action) {
-          scrollToSection(data.action);
-        }
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: (Date.now() + 1).toString(),
-            role: "assistant",
-            content:
-              data.error ||
-              "I encountered a temporary glitch. Please feel free to ask again or contact Matthew directly.",
-            timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-          },
-        ]);
       }
-    } catch (err) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content:
-            "I couldn't connect right now, but you can explore Matthew's portfolio sections or reach out via the contact form!",
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        },
-      ]);
-    } finally {
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: aiResult.response,
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        action: aiResult.action,
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
       setLoading(false);
-    }
+
+      if (aiResult.action) {
+        scrollToSection(aiResult.action);
+      }
+    }, 400);
   }
 
   function handlePromptClick(prompt: { label: string; query: string; action?: string }) {
@@ -158,7 +351,6 @@ export default function MattieTechAI() {
   }
 
   function handleCopy(id: string, text: string) {
-    // Strip action tags before copying
     const cleanText = text.replace(/\[NAVIGATE:#[a-zA-Z0-9_-]+\]/g, "").trim();
     navigator.clipboard.writeText(cleanText);
     setCopiedId(id);
@@ -188,12 +380,10 @@ export default function MattieTechAI() {
   function renderFormattedContent(content: string, actionTarget?: string) {
     let text = content;
 
-    // Remove [NAVIGATE:#section] tag from visible text string
     const navMatch = text.match(/\[NAVIGATE:(#[a-zA-Z0-9_-]+)\]/);
     const targetSection = navMatch ? navMatch[1] : actionTarget;
     text = text.replace(/\[NAVIGATE:#[a-zA-Z0-9_-]+\]/g, "").trim();
 
-    // Process markdown links [Label](url)
     const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
 
     return (
@@ -215,18 +405,15 @@ export default function MattieTechAI() {
             );
           }
 
-          // Split lines for list and bold parsing
           const lines = part.split("\n");
           return (
             <div key={idx}>
               {lines.map((line, lineIdx) => {
                 if (!line.trim()) return <div key={lineIdx} className="h-1" />;
 
-                // Check bullet point
                 const isBullet = line.trim().startsWith("•") || line.trim().startsWith("-");
                 const lineContent = isBullet ? line.trim().replace(/^[-•]\s*/, "") : line;
 
-                // Bold parsing (**text**)
                 const segments = lineContent.split(/(\*\*[^*]+\*\*)/g);
 
                 return (

@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import AnimatedHeadline from "./AnimatedHeadline";
+import DownloadResumeButton from "./DownloadResumeButton";
 import { profile } from "@/lib/data";
-
-
 
 export default function Hero() {
   return (
@@ -76,25 +75,18 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
             >
-              <a
-                href={profile.resumeHref}
-                download
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-signal to-sky-400 text-white px-6 py-3 text-sm font-medium hover:brightness-110 transition-all"
-              >
-                <Download size={16} />
-                Download Resume
-              </a>
+              <DownloadResumeButton variant="primary" />
               <div className="flex items-center gap-3">
                 <a
                   href="#projects"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-bone-border dark:border-void-border px-5 py-3 text-sm font-medium hover:border-signal transition-colors"
+                  className="group btn-secondary"
                 >
-                  <ExternalLink size={16} />
+                  <ExternalLink size={16} className="transition-transform group-hover:scale-110" />
                   View Projects
                 </a>
                 <a
                   href="#contact"
-                  className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink-muted dark:text-paper-muted hover:text-signal dark:hover:text-signal transition-colors px-2 py-3"
+                  className="group btn-ghost px-2 py-3"
                 >
                   Contact
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

@@ -56,7 +56,7 @@ export default function Navbar() {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="flex items-center shrink-0"
+          className="flex items-center shrink-0 hover:scale-105 transition-transform cursor-pointer"
         >
           <span className="font-display font-semibold text-lg tracking-tight">
             Mattie<span className="text-signal">Tech</span>
@@ -80,7 +80,7 @@ export default function Navbar() {
                 e.preventDefault();
                 scrollToSection(s.id);
               }}
-              className={`text-sm font-medium transition-colors relative py-1 ${
+              className={`text-sm font-medium transition-all hover:scale-105 active:scale-95 relative py-1 cursor-pointer ${
                 active === s.id
                   ? "text-signal"
                   : "text-ink-muted hover:text-ink dark:text-paper-muted dark:hover:text-paper"
@@ -102,7 +102,7 @@ export default function Navbar() {
           <button
             onClick={toggle}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="hidden lg:grid w-9 h-9 place-items-center rounded-full border border-bone-border dark:border-void-border hover:border-signal transition-colors"
+            className="hidden lg:grid w-9 h-9 place-items-center rounded-full border border-bone-border dark:border-void-border hover:border-signal btn-hover-effect hover:shadow-md hover:shadow-signal/20"
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
@@ -112,7 +112,7 @@ export default function Navbar() {
               e.preventDefault();
               scrollToSection("contact");
             }}
-            className="hidden sm:inline-flex items-center rounded-full bg-gradient-to-r from-signal to-sky-400 text-white px-5 py-2.5 text-sm font-medium hover:brightness-110 transition-all"
+            className="hidden sm:inline-flex btn-primary px-5 py-2.5 text-sm font-medium"
           >
             Let&apos;s talk
           </a>
@@ -120,7 +120,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
-            className="lg:hidden w-9 h-9 grid place-items-center rounded-full border border-bone-border dark:border-void-border"
+            className="lg:hidden w-9 h-9 grid place-items-center rounded-full border border-bone-border dark:border-void-border btn-hover-effect hover:border-signal"
           >
             {menuOpen ? <X size={16} /> : <Menu size={16} />}
           </button>

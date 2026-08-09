@@ -94,7 +94,7 @@ export default function Projects() {
 
                   <button
                     onClick={() => setOpenCase(isOpen ? null : project.name)}
-                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-signal w-fit"
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-signal hover:text-signal-light hover:underline transition-colors w-fit cursor-pointer active:scale-95"
                     aria-expanded={isOpen}
                   >
                     Case study
@@ -137,7 +137,7 @@ export default function Projects() {
                         href={project.demo ?? "#contact"}
                         target={project.demo ? "_blank" : undefined}
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-signal to-sky-400 text-white px-4 py-2 text-sm font-medium hover:brightness-110 transition-all"
+                        className="btn-primary px-4 py-2 text-sm font-medium"
                       >
                         {project.demo && <ExternalLink size={14} />}
                         {project.demoLabel ?? "Live demo"}
@@ -148,7 +148,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full border border-bone-border dark:border-void-border px-4 py-2 text-sm font-medium hover:border-signal transition-colors"
+                        className="btn-secondary px-4 py-2 text-sm font-medium"
                       >
                         <Github size={14} /> GitHub
                       </a>
