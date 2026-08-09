@@ -161,7 +161,7 @@ export const projects: Project[] = [
     caseStudy:
       "Built to solve a real problem I saw every exam season: students drowning in dense lecture PDFs with no time to condense them. CampusTutor AI now has 91 active users, has processed 98 documents, and has produced 157 AI generations — real usage, not a demo.",
     stack: ["Next.js", "Supabase", "Google Gemini API", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/mattietech/campustutor-ai",
+    github: "https://github.com/MattieTech/campustutor-final",
     demo: "https://campustutor-ai.vercel.app",
     demoLabel: "Live demo",
     featured: true,
@@ -176,7 +176,7 @@ export const projects: Project[] = [
     caseStudy:
       "My most ambitious build to date: an in-browser Monaco editor, AI-generated challenges, 3D reward scenes and integrated payments, architected as a genuine production system rather than a tutorial project.",
     stack: ["Next.js 15", "Express", "Supabase", "Gemini API", "Monaco Editor", "React Three Fiber", "Stripe / Paystack"],
-    github: "https://github.com/mattietech/codequest-ai",
+    github: "https://github.com/MattieTech/codequest-ai",
     demoLabel: "Request early access",
     featured: true,
     accent: "indigo",
@@ -190,7 +190,9 @@ export const projects: Project[] = [
     caseStudy:
       "Started as a simple HTML/CSS site to help my own faculty find scattered information, then grew into a maintained multi-page portal used across multiple sessions.",
     stack: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/mattietech/fci-student-guide",
+    github: "https://github.com/MattieTech/FCI-Student-guild",
+    demo: "https://fci-student-guild.vercel.app",
+    demoLabel: "Live demo",
     featured: true,
     accent: "violet",
     preview: "/images/projects/fci-student-guide.webp",
@@ -203,7 +205,9 @@ export const projects: Project[] = [
     caseStudy:
       "One of my first real products. Simple by design, but it taught me the fundamentals of shipping something other people actually rely on.",
     stack: ["JavaScript", "HTML", "CSS"],
-    github: "https://github.com/mattietech/prograde",
+    github: "https://github.com/MattieTech/ProGradeByMattieTech",
+    demo: "https://prograde-mattietech.vercel.app",
+    demoLabel: "Live demo",
     accent: "teal",
     preview: "/images/projects/prograde.webp",
   },
@@ -215,8 +219,8 @@ export const projects: Project[] = [
     caseStudy:
       "Rebuilt from scratch with a deliberate design system rather than a template — every section, animation and interaction chosen to reflect how I actually work.",
     stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/mattietech/portfolio",
-    demo: "https://mattietech.dev",
+    github: "https://github.com/MattieTech/mattietech",
+    demo: "https://mattietech-portfolio.web.app",
     demoLabel: "Live demo",
     accent: "cyan",
     preview: "/images/projects/mattietech-portfolio.webp",
