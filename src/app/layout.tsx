@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorGlow from "@/components/CursorGlow";
 import ScrollToTop from "@/components/ScrollToTop";
+import MattieTechAI from "@/components/MattieTechAI";
 import { profile } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SmoothScroll>
             {children}
             <ScrollToTop />
+            <MattieTechAI />
           </SmoothScroll>
         </ThemeProvider>
       </body>

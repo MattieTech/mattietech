@@ -113,7 +113,7 @@ export default function Hero() {
             <div className="relative aspect-[1024/1483]">
               <div className="absolute -inset-6 rounded-[2rem] bg-signal/[0.08] blur-3xl -z-10" />
               <Image
-                src="/images/portrait.png"
+                src="/images/portrait.webp"
                 alt="Portrait of Matthew Aliu"
                 fill
                 priority

@@ -166,7 +166,7 @@ export const projects: Project[] = [
     demoLabel: "Live demo",
     featured: true,
     accent: "cyan",
-    preview: "/images/projects/campustutor-ai.png",
+    preview: "/images/projects/campustutor-ai.webp",
   },
   {
     name: "CodeQuest AI",
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     demoLabel: "Request early access",
     featured: true,
     accent: "indigo",
-    preview: "/images/projects/codequest-ai.png",
+    preview: "/images/projects/codequest-ai.webp",
   },
   {
     name: "FCI Student Guide",
@@ -193,7 +193,7 @@ export const projects: Project[] = [
     github: "https://github.com/mattietech/fci-student-guide",
     featured: true,
     accent: "violet",
-    preview: "/images/projects/fci-student-guide.png",
+    preview: "/images/projects/fci-student-guide.webp",
   },
   {
     name: "ProGrade",
@@ -205,7 +205,7 @@ export const projects: Project[] = [
     stack: ["JavaScript", "HTML", "CSS"],
     github: "https://github.com/mattietech/prograde",
     accent: "teal",
-    preview: "/images/projects/prograde.png",
+    preview: "/images/projects/prograde.webp",
   },
   {
     name: "MattieTech Portfolio",
@@ -219,7 +219,7 @@ export const projects: Project[] = [
     demo: "https://mattietech.dev",
     demoLabel: "Live demo",
     accent: "cyan",
-    preview: "/images/projects/mattietech-portfolio.png",
+    preview: "/images/projects/mattietech-portfolio.webp",
   },
 ];
 
